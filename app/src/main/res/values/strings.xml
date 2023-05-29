@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Scancare</string>
+    <string name="title_home">Home</string>
+    <string name="title_scanning">Scanning</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="desc_carousel_1">Did You Already Wash Your Face Today? </string>
+    <string name="desc_carousel_2">Scan your Face Now! </string>
+    <string name="desc_carousel_3">This are Tips to Make Your Face Amazing</string>
+</resources>
