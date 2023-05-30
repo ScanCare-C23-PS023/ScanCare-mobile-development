@@ -29,16 +29,17 @@ pip install tensorflow
 pip install google-cloud
 ```
 
-## Installing
-A step by step series of examples that tell you how to get a development environment running.
-```
+### Installing and Running
+
+1. Clone this repository.
+```bash
 git clone https://github.com/yourusername/Scancare.git
-cd Scancare
-python app.py
 ```
+2. Open the project in Android Studio.
+3. Run the project on an emulator or an actual Android device.
 
 ## Built With
-- [Flask](http://flask.palletsprojects.com/) - The web framework used
+- [Android Studio](Android Studio - The IDE used) - The IDE used
 - [TensorFlow](http://flask.palletsprojects.com/) - The machine learning framework used
 - [Google Cloud Platform]( https://cloud.google.com/) - Used for API management
 
@@ -54,3 +55,19 @@ python app.py
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
+
+## Acknowledgments
+
+We would like to express our gratitude to the following:
+
+- The Bangkit 2023 Batch 1 program, for providing us the opportunity and platform to develop this project. This experience has been instrumental in our growth and learning.
+  
+- Our mentors and instructors, for their invaluable guidance and expertise. Your dedication and encouragement have inspired us to push our boundaries.
+
+- TensorFlow and the Google Cloud Platform teams, for developing and maintaining these powerful tools that have been critical in the creation of Scancare.
+
+- Our users and the open-source community, for their support and contributions. Your feedback and involvement have been vital in improving Scancare.
+
+- Lastly, we would like to acknowledge all those who have indirectly contributed to this project. Your work has made a difference.
+
+Thank you for your support and belief in Scancare. We look forward to continuing our journey in enhancing skincare through technology.
