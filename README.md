@@ -13,7 +13,6 @@ This project serves as the capstone project for the Bangkit 2023 Batch 1 program
 - Facial scan for skin analysis
 - Personalized skincare product recommendations
 - Machine learning algorithms for accurate detection and analysis
-- Flask web application for a user-friendly interface
 - Google Cloud Platform integration for robust API management
 
 ## Getting Started
