@@ -39,7 +39,7 @@ git clone https://github.com/yourusername/Scancare.git
 3. Run the project on an emulator or an actual Android device.
 
 ## Built With
-- [Android Studio](Android Studio - The IDE used) - The IDE used
+- [Android Studio](https://developer.android.com/studio) - The IDE used
 - [TensorFlow](http://flask.palletsprojects.com/) - The machine learning framework used
 - [Google Cloud Platform]( https://cloud.google.com/) - Used for API management
 
