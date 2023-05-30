@@ -17,12 +17,6 @@ class HomeFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    // Initialize the images
-    private val sampleImages = intArrayOf(R.drawable.banner_carousel, R.drawable.banner_carousel, R.drawable.banner_carousel)
-
-    private val imageListener = ImageListener { position, imageView ->
-        imageView.setImageResource(sampleImages[position])
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,10 +32,6 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner) {
 
         }
-
-        // Initialize the CarouselView
-        binding.carouselView.setPageCount(sampleImages.size)
-        binding.carouselView.setImageListener(imageListener)
 
         return root
     }
