@@ -6,53 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/constraintLayout"
+
+
+
+    <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="32dp"
-        app:layoutDescription="@xml/fragment_home_xml_constraintlayout_scene"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:cardCornerRadius="24dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/carousel_1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:cardCornerRadius="24dp"
-            android:backgroundTint="@color/pink">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="8dp"
-                    android:gravity=""
-                    android:text="@string/desc_carousel_1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="215dp" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -60,6 +29,83 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="255dp" />
+
+
+<!--    <androidx.constraintlayout.motion.widget.MotionLayout-->
+<!--        android:id="@+id/constraintLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        app:layoutDescription="@xml/fragment_home_xml_constraintlayout_scene"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/guideline"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/carousel_1"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="130dp"-->
+<!--            app:cardCornerRadius="24dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:scaleType="centerCrop"-->
+<!--                android:src="@drawable/banner_1" />-->
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/carousel_2"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="130dp"-->
+<!--            app:cardCornerRadius="24dp"-->
+<!--            app:layout_constraintStart_toEndOf="parent">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:scaleType="centerCrop"-->
+<!--                android:src="@drawable/banner_1" />-->
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <androidx.constraintlayout.utils.widget.ImageFilterView-->
+<!--            android:id="@+id/menu1"-->
+<!--            android:layout_width="15dp"-->
+<!--            android:layout_height="15dp"-->
+<!--            app:altSrc="@drawable/baseline_circle_24"-->
+<!--            app:layout_constraintEnd_toStartOf="@id/menu2"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/menu2"-->
+<!--            app:srcCompat="@drawable/ic_circle_isnt_full24" />-->
+
+<!--        <androidx.constraintlayout.utils.widget.ImageFilterView-->
+<!--            android:id="@+id/menu2"-->
+<!--            android:layout_width="15dp"-->
+<!--            android:layout_height="15dp"-->
+<!--            android:layout_marginTop="4dp"-->
+<!--            app:altSrc="@drawable/baseline_circle_24"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/carousel_1"-->
+<!--            app:layout_constraintStart_toStartOf="@id/carousel_1"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/carousel_1"-->
+<!--            app:srcCompat="@drawable/ic_circle_isnt_full24" />-->
+
+<!--        <androidx.constraintlayout.utils.widget.ImageFilterView-->
+<!--            android:id="@+id/menu3"-->
+<!--            android:layout_width="15dp"-->
+<!--            android:layout_height="15dp"-->
+<!--            app:altSrc="@drawable/baseline_circle_24"-->
+<!--            app:layout_constraintStart_toEndOf="@id/menu2"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/menu2"-->
+<!--            app:srcCompat="@drawable/ic_circle_isnt_full24" />-->
+<!--    </androidx.constraintlayout.motion.widget.MotionLayout>-->
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
