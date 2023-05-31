@@ -182,13 +182,13 @@
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-
             android:layout_width="0dp"
             android:layout_height="130dp" />
     </ConstraintSet>
     <Transition
         motion:constraintSetStart="@+id/menu2"
-        motion:constraintSetEnd="@+id/menu3" >
+        motion:constraintSetEnd="@+id/menu3"
+        motion:duration="1000">
         <OnSwipe motion:dragDirection="dragLeft" />
     </Transition>
 </MotionScene>

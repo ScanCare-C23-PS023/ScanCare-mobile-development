@@ -6,4 +6,9 @@
     <string name="desc_carousel_1">Did You Already Wash Your Face Today? </string>
     <string name="desc_carousel_2">Scan your Face Now! </string>
     <string name="desc_carousel_3">This are Tips to Make Your Face Amazing</string>
+    <string name="scancare">Scancare</string>
+    <string name="brand_name">Brand Name</string>
+    <string name="product_name">Product Name</string>
+    <string name="title_recommended">Top 10 Recommended Skincare</string>
+    <string name="title_articles">Articles</string>
 </resources>

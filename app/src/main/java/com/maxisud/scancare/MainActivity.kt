@@ -50,7 +50,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_scanning, R.id.navigation_favorite
             )
         )
-        // Removed setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
