@@ -18,13 +18,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardview_constructor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="96dp"
         android:layout_marginRight="96dp"
         android:layout_marginBottom="32dp"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp"
         app:cardCornerRadius="20dp"
         app:cardBackgroundColor="@color/transparent"
         app:cardElevation="0dp"
@@ -37,11 +39,12 @@
             android:layout_height="wrap_content"
             app:elevation="0dp"
             app:menu="@menu/bottom_nav_menu"
+            app:itemBackground="@drawable/bottom_nav_item_background"
             app:labelVisibilityMode="unlabeled"
             style="@style/TransparentBottomNav">
         </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 
 
