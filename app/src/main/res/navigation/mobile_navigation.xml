@@ -12,9 +12,9 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_scanning"
-        android:name="com.maxisud.scancare.ui.dashboard.DashboardFragment"
+        android:id="@+id/navigation_favorite"
+        android:name="com.maxisud.scancare.ui.favorite.FavoriteFragment"
         android:label="@string/title_scanning"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_favorite" />
 
 </navigation>
