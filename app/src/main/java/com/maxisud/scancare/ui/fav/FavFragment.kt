@@ -1,4 +1,4 @@
-package com.maxisud.scancare.ui.dashboard
+package com.maxisud.scancare.ui.fav
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.maxisud.scancare.databinding.FragmentDashboardBinding
+import com.maxisud.scancare.databinding.FragmentFavoriteBinding
+import com.maxisud.scancare.ui.dashboard.FavViewModel
 
-class DashboardFragment : Fragment() {
+class FavFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentFavoriteBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +23,14 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        val favViewModel =
+            ViewModelProvider(this).get(FavViewModel::class.java)
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
+        favViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
