@@ -13,4 +13,13 @@
     <string name="title_articles">Articles</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bottom_sheet_behavior">com.google.android.material.bottomsheet.BottomSheetBehavior</string>
+    <string name="signin">SignIn</string>
+    <string name="recommended_title">Top 10 Recommended Skincare</string>
+    <string name="see_all">See all</string>
+    <string name="percent">69%</string>
+    <string name="all_possibility">All Possibility</string>
+    <string name="the_result">The Result</string>
+    <string name="acne_title">Acne Title</string>
+    <string name="title_detail_disease">What is it?</string>
 </resources>

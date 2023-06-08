@@ -52,6 +52,6 @@ class HomeViewModel : ViewModel() {
     }
 
     companion object {
-        private const val TAG = "HomeViewModel"
+        const val TAG = "HomeViewModel"
     }
 }

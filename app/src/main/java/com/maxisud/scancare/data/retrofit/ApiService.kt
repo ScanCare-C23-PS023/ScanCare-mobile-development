@@ -1,11 +1,28 @@
 package com.maxisud.scancare.data.retrofit
 
+import com.maxisud.scancare.data.response.DiseaseDetailResponse
+import com.maxisud.scancare.data.response.PredictionResponse
+import com.maxisud.scancare.data.response.PredictionResponseItem
 import com.maxisud.scancare.data.response.ProductResponse
 import com.maxisud.scancare.data.response.ProductResponseItem
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Multipart
+import retrofit2.http.POST
+import retrofit2.http.Part
+import retrofit2.http.Path
 
 interface ApiService {
-    @GET("product")
+    @GET("products")
     fun getRecProduct(): Call<List<ProductResponseItem>>
+
+    @GET("diseases/{name_disease}")
+    fun getDetailDisease(@Path("name_disease") nameDisease: String) : Call<DiseaseDetailResponse>
+}
+
+interface FlaskApiService {
+    @Multipart
+    @POST("predict")
+    fun uploadImage(@Part image: MultipartBody.Part): Call<List<PredictionResponseItem>>
 }
