@@ -37,7 +37,7 @@
         android:layout_marginEnd="24dp"
         android:clickable="true"
         android:focusable="true"
-        android:text="SignIn"
+        android:text="@string/signin"
         app:layout_constraintBottom_toBottomOf="@id/logo_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/logo_text" />
@@ -159,7 +159,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
-        android:text="Top 10 Recommended Skincare"
+        android:text="@string/recommended_title"
         style="@style/textfont_primary"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -170,7 +170,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="See all"
+        android:text="@string/see_all"
         app:layout_constraintBottom_toBottomOf="@id/title_recommended"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/title_recommended" />

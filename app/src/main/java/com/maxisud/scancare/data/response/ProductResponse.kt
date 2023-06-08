@@ -14,13 +14,13 @@ data class ProductResponse(
 @Parcelize
 data class ProductResponseItem(
 
-	@field:SerializedName("bg_color")
+	@field:SerializedName("bgColor")
 	val bgColor: String,
 
-	@field:SerializedName("product")
-	val product: String,
+	@field:SerializedName("kind")
+	val kind: String,
 
-	@field:SerializedName("img_url")
+	@field:SerializedName("imageURL")
 	val imgUrl: String,
 
 	@field:SerializedName("rating")

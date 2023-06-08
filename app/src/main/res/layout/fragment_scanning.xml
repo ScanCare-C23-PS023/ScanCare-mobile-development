@@ -11,6 +11,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <View
+        android:id="@+id/cropped_view"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:background="@drawable/ic_crop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
+    <ImageView
+        android:id="@+id/confirmImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+
     <ImageView
         android:id="@+id/captureImage"
         android:layout_width="80dp"
@@ -20,6 +37,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_capture_24dp" />
+
+
 
     <ImageView
         android:id="@+id/gallery"
@@ -54,6 +73,28 @@
         app:srcCompat="@drawable/ic_back_24dp" />
 
     <ImageView
+        android:id="@+id/cancel_photo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_close_24dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/check_photo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="110dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_check_24"
+        android:visibility="gone" />
+
+    <ImageView
         android:id="@+id/flash"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -63,11 +104,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_flash_24dp" />
 
-<!--    <ImageView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height=""-->
-
-
-    
 
 </androidx.constraintlayout.widget.ConstraintLayout>

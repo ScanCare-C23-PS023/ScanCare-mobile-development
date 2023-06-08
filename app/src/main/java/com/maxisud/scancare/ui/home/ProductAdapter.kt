@@ -26,7 +26,7 @@ class ProductAdapter(private val listProduct: List<ProductResponseItem>) : Recyc
         Log.d(TAG, "onBindViewHolder at position $position")
         val product = listProduct[position]
 
-        holder.tvProduct.text = product.product.trimIndent()
+        holder.tvProduct.text = product.kind.trimIndent()
         holder.tvBrand.text = product.brand.trimIndent()
         holder.tvRating.text = product.rating.trimIndent()
         val color = Color.parseColor(product.bgColor)

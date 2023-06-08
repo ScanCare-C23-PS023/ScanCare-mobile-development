@@ -18,13 +18,14 @@ import com.maxisud.scancare.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding!!
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val fab = binding.buttonScan
@@ -51,6 +52,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         val navView: BottomNavigationView = binding.bottomNavInstructor
+        navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.navigation_scanning -> {
+                    binding.bottomNavInstructor.visibility = View.GONE
+                    binding.buttonScan.visibility = View.GONE
+                }
+                else -> {
+                    binding.bottomNavInstructor.visibility = View.VISIBLE
+                    binding.buttonScan.visibility = View.VISIBLE
+                }
+            }
+        }
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
