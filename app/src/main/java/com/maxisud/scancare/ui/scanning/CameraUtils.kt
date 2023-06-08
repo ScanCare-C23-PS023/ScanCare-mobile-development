@@ -96,7 +96,6 @@ fun cropImageToAspectRatio(bitmap: Bitmap, aspectRatio: Float): Bitmap {
 
 
 suspend fun reduceFileImage(file: File): File {
-    delay(1000)
     val bitmap = BitmapFactory.decodeFile(file.path)
     var compressQuality = 100
     var streamLength: Int

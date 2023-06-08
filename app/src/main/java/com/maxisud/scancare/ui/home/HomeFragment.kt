@@ -1,6 +1,7 @@
 package com.maxisud.scancare.ui.home
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.maxisud.scancare.R
 import com.maxisud.scancare.data.response.ProductResponseItem
 import com.maxisud.scancare.databinding.FragmentHomeBinding
+import com.maxisud.scancare.ui.product_detail.ProductDetailActivity
 
 class HomeFragment : Fragment() {
 
@@ -77,6 +79,13 @@ class HomeFragment : Fragment() {
         val adapter = ProductAdapter(products)
         Log.d(ContentValues.TAG, "products count in Activity: ${products.size}")
         binding.rvRecommended.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        adapter.setOnItemClickCallback(object : ProductAdapter.OnItemClickCallback{
+            override fun onItemClicked(product: ProductResponseItem){
+                val intentToDetail = Intent(requireContext(), ProductDetailActivity::class.java)
+                intentToDetail.putExtra("DATA", product.id)
+                startActivity(intentToDetail)
+            }
+        })
         binding.rvRecommended.adapter = adapter
     }
 }

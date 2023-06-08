@@ -21,14 +21,25 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     private var _binding : ActivityResultBinding? = null
     private val binding get() = _binding!!
-    private lateinit var scanningViewModel: ScanningViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val resultDetailFragment = ResultDetailFragment.newInstance()
 
         bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+
+        // Add the callback
+        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                if (slideOffset < 0) {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                }
+            }
+        })
 
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
