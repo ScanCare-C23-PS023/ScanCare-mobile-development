@@ -27,17 +27,17 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="60dp"
                 android:foregroundGravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/cv_list"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/product" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cv_list"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -82,27 +82,26 @@
                         style="@style/textfont_primary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="3dp"
                         android:text="4.5"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/guideline_rating"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="100dp"
+                        app:layout_constraintEnd_toStartOf="@id/textView"/>
 
                     <TextView
+                        android:id="@+id/textView"
                         style="@style/textfont_secondary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="4dp"
                         android:layout_marginBottom="8dp"
                         android:gravity="bottom"
                         android:text="/5"
                         android:textSize="11sp"
                         app:layout_constraintBottom_toBottomOf="@id/tv_rating"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/tv_rating"
                         app:layout_constraintTop_toTopOf="@id/tv_rating" />
 
                     <androidx.constraintlayout.widget.Guideline

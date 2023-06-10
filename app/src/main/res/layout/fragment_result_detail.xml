@@ -1,252 +1,284 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/corners"
     tools:context=".ui.result.ResultDetailFragment">
 
-    <TextView
-        android:id="@+id/sub_title_result"
-        style="@style/textfont_secondary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/the_result"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollview_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/title_result"
-        style="@style/textfont_primary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/acne_title"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="@+id/sub_title_result"
-        app:layout_constraintTop_toBottomOf="@+id/sub_title_result" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/probability_container"
-        android:layout_width="50dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="-10dp"
-        android:layout_marginEnd="32dp"
-        app:cardBackgroundColor="@color/blue"
-        app:cardCornerRadius="9dp"
-        app:layout_constraintBottom_toBottomOf="@id/title_result"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/guideline_vertical"
-        app:layout_constraintTop_toTopOf="@id/title_result">
-
-        <TextView
-            android:id="@+id/probability_highest"
-            style="@style/textfont_secondary"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/percent"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
-    </androidx.cardview.widget.CardView>
+            android:background="@drawable/corners">
 
-    <TextView
-        android:id="@+id/title_possibility"
-        style="@style/textfont_secondary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/all_possibility"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/title_result"
-        app:layout_constraintTop_toBottomOf="@+id/title_result" />
+            <TextView
+                android:id="@+id/sub_title_result"
+                style="@style/textfont_secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/the_result"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/square_prob_1"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="16dp"
-        app:cardBackgroundColor="@color/blue"
-        app:cardCornerRadius="7dp"
-        app:layout_constraintBottom_toTopOf="@id/square_prob_2"
-        app:layout_constraintStart_toStartOf="@id/square_prob_2" />
+            <TextView
+                android:id="@+id/title_result"
+                style="@style/textfont_primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/acne_title"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="@+id/sub_title_result"
+                app:layout_constraintTop_toBottomOf="@+id/sub_title_result" />
 
-    <TextView
-        android:id="@+id/prob1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/acne_title"
-        style="@style/textfont_primary"
-        android:textSize="15sp"
-        android:textColor="#FF494B4F"
-        app:layout_constraintBottom_toBottomOf="@id/square_prob_1"
-        app:layout_constraintStart_toEndOf="@id/square_prob_1"
-        app:layout_constraintTop_toTopOf="@id/square_prob_1" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/probability_container"
+                android:layout_width="50dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="-10dp"
+                android:layout_marginEnd="32dp"
+                app:cardBackgroundColor="@color/blue"
+                app:cardCornerRadius="9dp"
+                app:layout_constraintBottom_toBottomOf="@id/title_result"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline_vertical"
+                app:layout_constraintTop_toTopOf="@id/title_result">
 
-    <TextView
-        android:id="@+id/prob1_percent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/percent"
-        android:textSize="15sp"
-        style="@style/textfont_primary"
-        app:layout_constraintEnd_toEndOf="@id/probability_container"
-        app:layout_constraintBottom_toBottomOf="@id/square_prob_1"
-        app:layout_constraintTop_toTopOf="@id/square_prob_1"/>
+                <TextView
+                    android:id="@+id/probability_highest"
+                    style="@style/textfont_secondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/percent"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/square_prob_2"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="32dp"
-        app:cardBackgroundColor="@color/blue"
-        app:cardCornerRadius="7dp"
-        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal"
-        app:layout_constraintEnd_toEndOf="@id/guideline3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/title_possibility"
-        app:layout_constraintTop_toBottomOf="@id/guideline4"
-        app:layout_constraintVertical_bias="0.912" />
+            <TextView
+                android:id="@+id/title_possibility"
+                style="@style/textfont_secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/all_possibility"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/title_result"
+                app:layout_constraintTop_toBottomOf="@+id/title_result" />
 
-    <TextView
-        android:id="@+id/prob2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/acne_title"
-        style="@style/textfont_primary"
-        android:textSize="15sp"
-        android:textColor="#FF494B4F"
-        app:layout_constraintBottom_toBottomOf="@id/square_prob_2"
-        app:layout_constraintStart_toEndOf="@id/square_prob_2"
-        app:layout_constraintTop_toTopOf="@id/square_prob_2" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/square_prob_1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/blue"
+                app:cardCornerRadius="7dp"
+                app:layout_constraintBottom_toTopOf="@id/square_prob_2"
+                app:layout_constraintStart_toStartOf="@id/square_prob_2" />
 
-    <TextView
-        android:id="@+id/prob2_percent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/percent"
-        android:textSize="15sp"
-        style="@style/textfont_primary"
-        app:layout_constraintEnd_toEndOf="@id/probability_container"
-        app:layout_constraintBottom_toBottomOf="@id/square_prob_2"
-        app:layout_constraintTop_toTopOf="@id/square_prob_2"/>
+            <TextView
+                android:id="@+id/prob1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/acne_title"
+                style="@style/textfont_primary"
+                android:textSize="15sp"
+                android:textColor="#FF494B4F"
+                app:layout_constraintBottom_toBottomOf="@id/square_prob_1"
+                app:layout_constraintStart_toEndOf="@id/square_prob_1"
+                app:layout_constraintTop_toTopOf="@id/square_prob_1" />
 
+            <TextView
+                android:id="@+id/prob1_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/percent"
+                android:textSize="15sp"
+                style="@style/textfont_primary"
+                app:layout_constraintEnd_toEndOf="@id/probability_container"
+                app:layout_constraintBottom_toBottomOf="@id/square_prob_1"
+                app:layout_constraintTop_toTopOf="@id/square_prob_1"/>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/square_prob_3"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="16dp"
-        app:cardBackgroundColor="@color/blue"
-        app:cardCornerRadius="7dp"
-        app:layout_constraintStart_toStartOf="@id/square_prob_2"
-        app:layout_constraintTop_toBottomOf="@id/square_prob_2" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/square_prob_2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="32dp"
+                app:cardBackgroundColor="@color/blue"
+                app:cardCornerRadius="7dp"
+                app:layout_constraintBottom_toTopOf="@id/guideline_horizontal"
+                app:layout_constraintEnd_toEndOf="@id/guideline3"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/title_possibility"
+                app:layout_constraintTop_toBottomOf="@id/guideline4"
+                app:layout_constraintVertical_bias="0.912" />
 
-    <TextView
-        android:id="@+id/prob3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/acne_title"
-        style="@style/textfont_primary"
-        android:textSize="15sp"
-        android:textColor="#FF494B4F"
-        app:layout_constraintBottom_toBottomOf="@id/square_prob_3"
-        app:layout_constraintStart_toEndOf="@id/square_prob_3"
-        app:layout_constraintTop_toTopOf="@id/square_prob_3" />
+            <TextView
+                android:id="@+id/prob2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/acne_title"
+                style="@style/textfont_primary"
+                android:textSize="15sp"
+                android:textColor="#FF494B4F"
+                app:layout_constraintBottom_toBottomOf="@id/square_prob_2"
+                app:layout_constraintStart_toEndOf="@id/square_prob_2"
+                app:layout_constraintTop_toTopOf="@id/square_prob_2" />
 
-    <TextView
-        android:id="@+id/prob3_percent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/percent"
-        android:textSize="15sp"
-        style="@style/textfont_primary"
-        app:layout_constraintEnd_toEndOf="@id/probability_container"
-        app:layout_constraintBottom_toBottomOf="@id/square_prob_3"
-        app:layout_constraintTop_toTopOf="@id/square_prob_3"/>
-
-
-    <View
-        android:id="@+id/horizontal_line1"
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/black"
-        app:layout_constraintEnd_toEndOf="@id/prob3_percent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/square_prob_3"
-        app:layout_constraintTop_toBottomOf="@id/square_prob_3" />
-
-    <TextView
-        android:id="@+id/title_detail_disease"
-        style="@style/textfont_primary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/title_detail_disease"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="@id/horizontal_line1"
-        app:layout_constraintTop_toBottomOf="@id/horizontal_line1" />
-
-    <View
-        android:id="@+id/horizontal_line2"
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="120dp"
-        android:background="@color/black"
-        app:layout_constraintEnd_toEndOf="@id/prob3_percent"
-        app:layout_constraintStart_toStartOf="@id/horizontal_line1"
-        app:layout_constraintTop_toBottomOf="@id/horizontal_line1" />
-
-    <TextView
-        android:id="@+id/tv_detail_disease"
-        style="@style/textfont_secondary"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:textColor="#FF494B4F"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@id/horizontal_line2"
-        app:layout_constraintEnd_toEndOf="@+id/horizontal_line1"
-        app:layout_constraintStart_toStartOf="@id/title_detail_disease"
-        app:layout_constraintTop_toBottomOf="@id/title_detail_disease"
-        tools:text="@tools:sample/lorem/random" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="325dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="265dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="60dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="100dp" />
+            <TextView
+                android:id="@+id/prob2_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/percent"
+                android:textSize="15sp"
+                style="@style/textfont_primary"
+                app:layout_constraintEnd_toEndOf="@id/probability_container"
+                app:layout_constraintBottom_toBottomOf="@id/square_prob_2"
+                app:layout_constraintTop_toTopOf="@id/square_prob_2"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/square_prob_3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/blue"
+                app:cardCornerRadius="7dp"
+                app:layout_constraintStart_toStartOf="@id/square_prob_2"
+                app:layout_constraintTop_toBottomOf="@id/square_prob_2" />
+
+            <TextView
+                android:id="@+id/prob3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/acne_title"
+                style="@style/textfont_primary"
+                android:textSize="15sp"
+                android:textColor="#FF494B4F"
+                app:layout_constraintBottom_toBottomOf="@id/square_prob_3"
+                app:layout_constraintStart_toEndOf="@id/square_prob_3"
+                app:layout_constraintTop_toTopOf="@id/square_prob_3" />
+
+            <TextView
+                android:id="@+id/prob3_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/percent"
+                android:textSize="15sp"
+                style="@style/textfont_primary"
+                app:layout_constraintEnd_toEndOf="@id/probability_container"
+                app:layout_constraintBottom_toBottomOf="@id/square_prob_3"
+                app:layout_constraintTop_toTopOf="@id/square_prob_3"/>
+
+
+            <View
+                android:id="@+id/horizontal_line1"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="@id/prob3_percent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/square_prob_3"
+                app:layout_constraintTop_toBottomOf="@id/square_prob_3" />
+
+            <TextView
+                android:id="@+id/title_detail_disease"
+                style="@style/textfont_primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/title_detail_disease"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@id/horizontal_line1"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line1" />
+
+            <View
+                android:id="@+id/horizontal_line2"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="120dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="@id/prob3_percent"
+                app:layout_constraintStart_toStartOf="@id/horizontal_line1"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line1" />
+
+            <TextView
+                android:id="@+id/tv_detail_disease"
+                style="@style/textfont_secondary"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="#FF494B4F"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line2"
+                app:layout_constraintEnd_toEndOf="@+id/horizontal_line1"
+                app:layout_constraintStart_toStartOf="@id/title_detail_disease"
+                app:layout_constraintTop_toBottomOf="@id/title_detail_disease"
+                tools:text="@tools:sample/lorem/random" />
+
+            <TextView
+                android:id="@+id/title_product_recommendation"
+                style="@style/textfont_primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/skincare_recomendation"
+                app:layout_constraintStart_toStartOf="@id/horizontal_line2"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line2" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_recommended"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_product_recommendation"
+                />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="325dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="265dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="60dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="100dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>

@@ -23,6 +23,9 @@ interface ApiService {
 
     @GET("diseases/{name_disease}")
     fun getDetailDisease(@Path("name_disease") nameDisease: String) : Call<DiseaseDetailResponse>
+
+    @GET("products/{name_disease}")
+    fun getRecProductDisease(@Path("name_disease") nameDisease: String): Call<List<ProductResponseItem>>
 }
 
 interface FlaskApiService {

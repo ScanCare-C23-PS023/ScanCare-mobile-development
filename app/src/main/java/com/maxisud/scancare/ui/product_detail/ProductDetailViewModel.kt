@@ -5,8 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
 import com.maxisud.scancare.data.response.ProductDetailResponseItem
+import com.maxisud.scancare.data.response.ProductResponseItem
 import com.maxisud.scancare.data.retrofit.ApiConfig
+import com.maxisud.scancare.ui.home.HomeViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,6 +22,8 @@ class ProductDetailViewModel : ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
+
+
 
 
     fun getDetailProduct(idProduct: String){
@@ -35,7 +40,7 @@ class ProductDetailViewModel : ViewModel() {
                     if (response.isSuccessful){
                         val responseBody = response.body()
                         if (responseBody != null && responseBody.isNotEmpty()){
-                            _detailProduct.value = responseBody[0] // Set the first item from the list
+                            _detailProduct.value = responseBody[0]
                         } else {
                             Log.e(TAG, "Response body is null")
                         }

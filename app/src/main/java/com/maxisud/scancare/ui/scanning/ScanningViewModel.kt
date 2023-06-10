@@ -1,6 +1,8 @@
 package com.maxisud.scancare.ui.scanning
 
 import android.net.Uri
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -26,6 +28,12 @@ class ScanningViewModel : ViewModel() {
     private val _croppedImageUri = MutableLiveData<Uri>()
     val croppedImageUri: LiveData<Uri> = _croppedImageUri
 
+    private val handler = Handler(Looper.getMainLooper())
+    private var call: Call<List<PredictionResponseItem>>? = null
+
+    private val _toastMessage = MutableLiveData<String>()
+    val toastMessage: LiveData<String> = _toastMessage
+
     fun uploadImage(imageMultiPart: MultipartBody.Part){
         _isLoading.value = true
         val apiService = ApiConfig.getFlaskApiService()
@@ -36,6 +44,7 @@ class ScanningViewModel : ViewModel() {
                 response: Response<List<PredictionResponseItem>>
             ) {
                 _isLoading.value = false
+                handler.removeCallbacksAndMessages(null)
                 if(response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody != null){
@@ -51,8 +60,17 @@ class ScanningViewModel : ViewModel() {
             override fun onFailure(call: Call<List<PredictionResponseItem>>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(HomeViewModel.TAG, "onFailure: ${t.message}")
+                handler.removeCallbacksAndMessages(null)
             }
         })
+        handler.postDelayed({
+            if (_isLoading.value == true) {
+                call?.cancel() // Cancel the request
+                _isLoading.value = false
+                Log.d(TAG, "Request cancelled due to timeout.")
+                _toastMessage.value = "Request timed out. Please try again."
+            }
+        }, 5000)
     }
 
     fun setCroppedImageUri(uri: Uri) {

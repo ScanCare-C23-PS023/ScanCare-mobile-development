@@ -1,5 +1,7 @@
 package com.maxisud.scancare.ui.result
 
+import android.content.ContentValues
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -10,11 +12,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.maxisud.scancare.data.response.DiseaseDetailResponse
+import com.maxisud.scancare.data.response.ProductResponseItem
 import com.maxisud.scancare.databinding.ActivityResultBinding
 import com.maxisud.scancare.databinding.FragmentResultDetailBinding
 import com.maxisud.scancare.ui.SharedRepository
 import com.maxisud.scancare.ui.home.HomeViewModel
+import com.maxisud.scancare.ui.home.ProductAdapter
+import com.maxisud.scancare.ui.product_detail.ProductDetailActivity
 import com.maxisud.scancare.ui.scanning.ScanningViewModel
 import com.maxisud.scancare.ui.scanning.ScanningViewModelFactory
 
@@ -58,13 +64,20 @@ class ResultDetailFragment : Fragment() {
 
             if (diseaseId != null) {
                 resultDetailViewModel.getDetailDisease(diseaseId!!)
+                resultDetailViewModel.findProductsDisease(diseaseId!!)
             }
+
+            val layoutManager = LinearLayoutManager(context)
+            binding.rvRecommended.layoutManager = layoutManager
 
 
         })
 
         resultDetailViewModel.detailDisease.observe(viewLifecycleOwner, Observer { detailDisease ->
             setDetailData(detailDisease)
+        })
+        resultDetailViewModel.products.observe(viewLifecycleOwner, Observer{ products ->
+            setProductsData(products)
         })
         SharedRepository.isLoading.observe(viewLifecycleOwner) { isLoading ->
             setContentVisibility(!isLoading)
@@ -97,6 +110,20 @@ class ResultDetailFragment : Fragment() {
         binding.titleDetailDisease.visibility = visibility
         binding.horizontalLine2.visibility = visibility
         binding.tvDetailDisease.visibility = visibility
+    }
+
+    private fun setProductsData(products: List<ProductResponseItem>) {
+        val adapter = ProductAdapter(products)
+        Log.d(ContentValues.TAG, "products count in Activity: ${products.size}")
+        binding.rvRecommended.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        adapter.setOnItemClickCallback(object : ProductAdapter.OnItemClickCallback{
+            override fun onItemClicked(product: ProductResponseItem){
+                val intentToDetail = Intent(requireContext(), ProductDetailActivity::class.java)
+                intentToDetail.putExtra("DATA", product.id)
+                startActivity(intentToDetail)
+            }
+        })
+        binding.rvRecommended.adapter = adapter
     }
 
     companion object {
