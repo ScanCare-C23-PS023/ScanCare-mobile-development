@@ -29,6 +29,7 @@ import androidx.lifecycle.lifecycleScope
 import com.maxisud.scancare.databinding.FragmentScanningBinding
 import com.maxisud.scancare.ui.result.ResultActivity
 import com.yalantis.ucrop.UCropActivity
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -86,6 +87,13 @@ class ScanningFragment : Fragment() {
                 else CameraSelector.DEFAULT_BACK_CAMERA
 
                 startCamera()
+            }
+            scanningViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+                if (isLoading) {
+                    binding.progressBar.visibility = View.VISIBLE
+                } else {
+                    binding.progressBar.visibility = View.GONE
+                }
             }
         } else {
             requestPermissions(REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
@@ -221,6 +229,9 @@ class ScanningFragment : Fragment() {
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     lifecycleScope.launch {
+                        // Display loading indicator
+                        binding.progressBar.visibility = View.VISIBLE
+
                         val reducedFile = reduceFileImage(photoFile)
                         rotateFile(reducedFile, cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA)
 
@@ -231,15 +242,17 @@ class ScanningFragment : Fragment() {
                         val croppedFile = createFile(requireContext())
                         croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream(croppedFile))
 
+                        // Add delay here to simulate a loading time for your image processing tasks
+                        delay(1000)
+
+                        // Hide loading indicator
+                        binding.progressBar.visibility = View.GONE
+
                         displayConfirm(croppedFile)
                     }
                 }
             }
         )
-    }
-
-    private fun uploadImage(){
-
     }
 
 

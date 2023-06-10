@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -21,6 +24,7 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     private var _binding : ActivityResultBinding? = null
     private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityResultBinding.inflate(layoutInflater)
@@ -28,20 +32,42 @@ class ResultActivity : AppCompatActivity() {
 
         bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
 
-        // Add the callback
-        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
+        bottomSheetBehavior.isHideable = false
+        bottomSheetBehavior.isFitToContents = true
 
+        val scanningViewModel by viewModels<ScanningViewModel>()
+
+        scanningViewModel.toastMessage.observe(this, Observer { message ->
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        })
+
+        SharedRepository.isLoading.observe(this) { isLoading ->
+            if (isLoading) {
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.GONE
             }
+        }
 
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                if (slideOffset < 0) {
-                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                }
+        binding.guideline1.viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                val guidelinesLocation = IntArray(2)
+                binding.guideline1.getLocationOnScreen(guidelinesLocation)
+
+                val photoResultLocation = IntArray(2)
+                binding.photoResult.getLocationOnScreen(photoResultLocation)
+
+                val screenHeight = resources.displayMetrics.heightPixels
+
+                val newPeekHeight = screenHeight - guidelinesLocation[1] + photoResultLocation[1]
+                bottomSheetBehavior.peekHeight = newPeekHeight
+
+                // Remove the listener to avoid multiple calls
+                binding.guideline1.viewTreeObserver.removeOnGlobalLayoutListener(this)
             }
         })
 
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         val bottomSheetFragment = ResultDetailFragment.newInstance()
