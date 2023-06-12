@@ -24,4 +24,5 @@
     <string name="title_detail_disease">What is it?</string>
     <string name="times_string">Once in A day</string>
     <string name="skincare_recomendation">Skincare Recomendation</string>
+    <string name="title_articles_temp">This is the example of a very long article title that needs to wrap onto two lines</string>
 </resources>

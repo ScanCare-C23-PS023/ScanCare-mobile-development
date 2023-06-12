@@ -32,4 +32,5 @@
         <item name="fontFamily">@font/montserrat</item>
         <item name="android:textColor">@color/grey</item>
     </style>
+
 </resources>
