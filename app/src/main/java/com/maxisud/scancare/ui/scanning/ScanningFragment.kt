@@ -117,6 +117,7 @@ class ScanningFragment : Fragment() {
                 scanningViewModel.croppedImageUri.observe(viewLifecycleOwner, { uri ->
                     val intent = Intent(requireActivity(), ResultActivity::class.java)
                     intent.putExtra("imageUri", uri.toString())
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                     startActivity(intent)
                 })
             }
@@ -229,7 +230,6 @@ class ScanningFragment : Fragment() {
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     lifecycleScope.launch {
-                        // Display loading indicator
                         binding.progressBar.visibility = View.VISIBLE
 
                         val reducedFile = reduceFileImage(photoFile)
@@ -242,10 +242,9 @@ class ScanningFragment : Fragment() {
                         val croppedFile = createFile(requireContext())
                         croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream(croppedFile))
 
-                        // Add delay here to simulate a loading time for your image processing tasks
                         delay(1000)
 
-                        // Hide loading indicator
+
                         binding.progressBar.visibility = View.GONE
 
                         displayConfirm(croppedFile)

@@ -1,5 +1,6 @@
 package com.maxisud.scancare.ui.result
 
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.maxisud.scancare.MainActivity
 import com.maxisud.scancare.R
 import com.maxisud.scancare.databinding.ActivityResultBinding
 import com.maxisud.scancare.ui.SharedRepository
@@ -42,10 +44,17 @@ class ResultActivity : AppCompatActivity() {
         })
 
         SharedRepository.isLoading.observe(this) { isLoading ->
-            if (isLoading) {
+            if (isLoading == true) {
                 binding.progressBar.visibility = View.VISIBLE
             } else {
                 binding.progressBar.visibility = View.GONE
+            }
+        }
+
+        SharedRepository.isTimeout.observe(this) { isTimeout ->
+            if (isTimeout == true) {
+                Toast.makeText(this, "Prediction took too long. Please try again.", Toast.LENGTH_SHORT).show()
+                SharedRepository.setTimeout(false)
             }
         }
 
@@ -63,7 +72,6 @@ class ResultActivity : AppCompatActivity() {
                 val newPeekHeight = screenHeight - guidelinesLocation[1] + photoResultLocation[1]
                 bottomSheetBehavior.peekHeight = newPeekHeight
 
-                // Remove the listener to avoid multiple calls
                 binding.guideline1.viewTreeObserver.removeOnGlobalLayoutListener(this)
             }
         })
@@ -78,13 +86,10 @@ class ResultActivity : AppCompatActivity() {
         Glide.with(this)
             .load(imageUri)
             .into(binding.photoResult)
+    }
 
-        SharedRepository.isLoading.observe(this) { isLoading ->
-            if (isLoading) {
-                binding.progressBar.visibility = View.VISIBLE
-            } else {
-                binding.progressBar.visibility = View.GONE
-            }
-        }
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        finish()
     }
 }

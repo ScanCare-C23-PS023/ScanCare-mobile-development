@@ -1,5 +1,6 @@
 package com.maxisud.scancare.data.retrofit
 
+import com.maxisud.scancare.data.response.ArticlesResponseItem
 import com.maxisud.scancare.data.response.DiseaseDetailResponse
 import com.maxisud.scancare.data.response.PredictionResponse
 import com.maxisud.scancare.data.response.PredictionResponseItem
@@ -26,6 +27,9 @@ interface ApiService {
 
     @GET("products/{name_disease}")
     fun getRecProductDisease(@Path("name_disease") nameDisease: String): Call<List<ProductResponseItem>>
+
+    @GET("articles")
+    fun getArticles(): Call<List<ArticlesResponseItem>>
 }
 
 interface FlaskApiService {

@@ -34,8 +34,16 @@ class ScanningViewModel : ViewModel() {
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> = _toastMessage
 
+    val timeoutHandler = Handler(Looper.getMainLooper())
+    val timeoutRunnable = Runnable {
+        if (SharedRepository.prediction.value == null) {
+            SharedRepository.setTimeout(true)
+        }
+    }
+
     fun uploadImage(imageMultiPart: MultipartBody.Part){
-        _isLoading.value = true
+        SharedRepository.setLoading(true)
+        timeoutHandler.postDelayed(timeoutRunnable, 5000)
         val apiService = ApiConfig.getFlaskApiService()
         val uploadImageRequest = apiService.uploadImage(imageMultiPart)
         uploadImageRequest.enqueue(object : Callback<List<PredictionResponseItem>> {
@@ -43,7 +51,8 @@ class ScanningViewModel : ViewModel() {
                 call: Call<List<PredictionResponseItem>>,
                 response: Response<List<PredictionResponseItem>>
             ) {
-                _isLoading.value = false
+                SharedRepository.setLoading(false)
+                timeoutHandler.removeCallbacks(timeoutRunnable)
                 handler.removeCallbacksAndMessages(null)
                 if(response.isSuccessful){
                     val responseBody = response.body()
@@ -58,15 +67,15 @@ class ScanningViewModel : ViewModel() {
                 }
             }
             override fun onFailure(call: Call<List<PredictionResponseItem>>, t: Throwable) {
-                _isLoading.value = false
+                SharedRepository.setLoading(false)
                 Log.e(HomeViewModel.TAG, "onFailure: ${t.message}")
                 handler.removeCallbacksAndMessages(null)
             }
         })
         handler.postDelayed({
             if (_isLoading.value == true) {
-                call?.cancel() // Cancel the request
-                _isLoading.value = false
+                call?.cancel()
+                SharedRepository.setLoading(false)
                 Log.d(TAG, "Request cancelled due to timeout.")
                 _toastMessage.value = "Request timed out. Please try again."
             }
