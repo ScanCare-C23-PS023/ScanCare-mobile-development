@@ -32,7 +32,7 @@ pip install google-cloud
 
 1. Clone this repository.
 ```bash
-git clone https://github.com/yourusername/Scancare.git
+git clone https://github.com/ScanCare-C23-PS023/ScanCare-mobile-development
 ```
 2. Open the project in Android Studio.
 3. Run the project on an emulator or an actual Android device.
