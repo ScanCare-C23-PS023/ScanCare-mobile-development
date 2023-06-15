@@ -35,7 +35,9 @@ pip install google-cloud
 git clone https://github.com/ScanCare-C23-PS023/ScanCare-mobile-development
 ```
 2. Open the project in Android Studio.
-3. Run the project on an emulator or an actual Android device.
+3. Create the project in Firebase and turn on Authentication and Realtime database.
+4. Import the `google-services.json` file from Firebase to the Android project.
+5. Run the project on an emulator or an actual Android device.
 
 ## Built With
 - [Android Studio](https://developer.android.com/studio) - The IDE used
