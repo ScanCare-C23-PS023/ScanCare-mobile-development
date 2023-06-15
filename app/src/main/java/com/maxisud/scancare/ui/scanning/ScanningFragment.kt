@@ -26,6 +26,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.maxisud.scancare.MainActivity
 import com.maxisud.scancare.databinding.FragmentScanningBinding
 import com.maxisud.scancare.ui.result.ResultActivity
 import com.yalantis.ucrop.UCropActivity
@@ -65,38 +66,27 @@ class ScanningFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (allPermissionsGranted()) {
-            startCamera()
-            binding.captureImage.setOnClickListener { takePhoto() }
-            binding.gallery.setOnClickListener { startGallery() }
-            binding.backButton.setOnClickListener {
-                requireActivity().onBackPressed()
-            }
-            binding.flash.setOnClickListener {
-                when(camera?.cameraInfo?.torchState?.value) {
-                    TorchState.ON -> {
-                        camera?.cameraControl?.enableTorch(false)
-                    }
-                    TorchState.OFF -> {
-                        camera?.cameraControl?.enableTorch(true)
-                    }
+        startCamera()
+        binding.captureImage.setOnClickListener { takePhoto() }
+        binding.gallery.setOnClickListener { startGallery() }
+        binding.backButton.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+        binding.flash.setOnClickListener {
+            when(camera?.cameraInfo?.torchState?.value) {
+                TorchState.ON -> {
+                    camera?.cameraControl?.enableTorch(false)
+                }
+                TorchState.OFF -> {
+                    camera?.cameraControl?.enableTorch(true)
                 }
             }
-            binding.switchCamera.setOnClickListener {
-                cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) CameraSelector.DEFAULT_FRONT_CAMERA
-                else CameraSelector.DEFAULT_BACK_CAMERA
+        }
+        binding.switchCamera.setOnClickListener {
+            cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) CameraSelector.DEFAULT_FRONT_CAMERA
+            else CameraSelector.DEFAULT_BACK_CAMERA
 
-                startCamera()
-            }
-            scanningViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-                if (isLoading) {
-                    binding.progressBar.visibility = View.VISIBLE
-                } else {
-                    binding.progressBar.visibility = View.GONE
-                }
-            }
-        } else {
-            requestPermissions(REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
+            startCamera()
         }
     }
 
@@ -132,7 +122,6 @@ class ScanningFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentScanningBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -147,40 +136,48 @@ class ScanningFragment : Fragment() {
 
 
     private fun startCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
+        val mainActivity = activity as MainActivity
+        mainActivity.checkCameraPermission { granted ->
+            if (granted) {
+                val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
+                cameraProviderFuture.addListener({
+                    val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
-        cameraProviderFuture.addListener({
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+                    val preview = Preview.Builder()
+                        .build()
+                        .also {
+                            it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
+                        }
 
+                    imageCapture = ImageCapture.Builder().build()
 
-            val preview = Preview.Builder()
-                .build()
-                .also {
-                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
-                }
+                    try {
+                        cameraProvider.unbindAll()
+                        cameraProvider.bindToLifecycle(
+                            viewLifecycleOwner, cameraSelector, preview, imageCapture
+                        )
 
-            imageCapture = ImageCapture.Builder().build()
+                    } catch (exc: Exception) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Failed to start the camera.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    camera = cameraProvider.bindToLifecycle(
+                        viewLifecycleOwner, cameraSelector, preview, imageCapture
+                    )
 
-            try {
-                cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
-                    viewLifecycleOwner, cameraSelector, preview, imageCapture
-                )
-
-            } catch (exc: Exception) {
-                Toast.makeText(
-                    requireContext(),
-                    "Failed to start the camera.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                }, ContextCompat.getMainExecutor(requireContext()))
+            } else {
+                // Camera permission not granted, handle accordingly
+                Toast.makeText(requireContext(), "Camera permission not granted", Toast.LENGTH_SHORT).show()
+                requireActivity().onBackPressed()
             }
-            camera = cameraProvider.bindToLifecycle(
-                viewLifecycleOwner, cameraSelector, preview, imageCapture
-            )
-
-        }, ContextCompat.getMainExecutor(requireContext()))
+        }
     }
+
     private fun displayConfirm(file: File) {
         val destinationUri = Uri.fromFile(createTempFile(requireContext()))
 
@@ -300,18 +297,7 @@ class ScanningFragment : Fragment() {
     }
 
 
-
-
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        ContextCompat.checkSelfPermission(
-            requireContext(), it
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
     companion object {
-        const val CAMERA_X_RESULT: Int = 200
-        private val REQUIRED_PERMISSIONS = arrayOf(android.Manifest.permission.CAMERA)
-        private const val REQUEST_CODE_PERMISSIONS = 10
         private const val UCROP_REQUEST_CODE = 101
 
     }

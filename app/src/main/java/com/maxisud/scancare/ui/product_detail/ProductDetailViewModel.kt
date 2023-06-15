@@ -24,8 +24,6 @@ class ProductDetailViewModel : ViewModel() {
     val isLoading: LiveData<Boolean> = _isLoading
 
 
-
-
     fun getDetailProduct(idProduct: String){
         viewModelScope.launch {
             _isLoading.value = true

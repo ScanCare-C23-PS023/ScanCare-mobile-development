@@ -11,6 +11,9 @@ object SharedRepository {
     private val _isLoading = MutableLiveData<Boolean?>()
     val isLoading: LiveData<Boolean?> = _isLoading
 
+    val _isTimeout = MutableLiveData<Boolean>()
+    val isTimeout: LiveData<Boolean> = _isTimeout
+
     fun setPrediction(prediction: List<PredictionResponseItem>) {
         _prediction.value = prediction
     }
@@ -22,11 +25,8 @@ object SharedRepository {
     fun clear() {
         _prediction.value = null
         _isLoading.value = null
-        _isTimeout.value = null
+        _isTimeout.value = false
     }
-
-    private val _isTimeout = MutableLiveData<Boolean?>()
-    val isTimeout: LiveData<Boolean?> = _isTimeout
 
     fun setTimeout(isTimeout: Boolean) {
         _isTimeout.value = isTimeout

@@ -26,6 +26,8 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     private var _binding : ActivityResultBinding? = null
     private val binding get() = _binding!!
+    private var isRetryButtonVisible = false
+    private var isLoadingComplete = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,14 +50,31 @@ class ResultActivity : AppCompatActivity() {
                 binding.progressBar.visibility = View.VISIBLE
             } else {
                 binding.progressBar.visibility = View.GONE
+                isLoadingComplete = true
+                updateBottomSheetVisibility()
             }
         }
 
         SharedRepository.isTimeout.observe(this) { isTimeout ->
             if (isTimeout == true) {
-                Toast.makeText(this, "Prediction took too long. Please try again.", Toast.LENGTH_SHORT).show()
-                SharedRepository.setTimeout(false)
+                Toast.makeText(this, "Fetch took too long. Please try again.", Toast.LENGTH_SHORT).show()
+                isRetryButtonVisible = true
+                SharedRepository._isTimeout.value = false
+                updateRetryButtonVisibility()
+                updateBottomSheetVisibility()
             }
+        }
+
+        scanningViewModel.isRetryButtonVisible.observe(this) { isVisible ->
+            isRetryButtonVisible = isVisible ?: false
+            updateRetryButtonVisibility()
+        }
+
+        binding.retryButton.setOnClickListener {
+            scanningViewModel.retryUploadImage()
+            binding.retryButton.visibility = View.GONE
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            updateRetryButtonVisibility()
         }
 
         binding.guideline1.viewTreeObserver.addOnGlobalLayoutListener(object :
@@ -76,20 +95,45 @@ class ResultActivity : AppCompatActivity() {
             }
         })
 
-
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        val bottomSheetFragment = ResultDetailFragment.newInstance()
-        fragmentTransaction.replace(R.id.bottom_sheet_fragment_container, bottomSheetFragment)
-        fragmentTransaction.commit()
-
         val imageUri = intent.getStringExtra("imageUri")?.let { Uri.parse(it) }
         Glide.with(this)
             .load(imageUri)
             .into(binding.photoResult)
     }
 
+    override fun onResume() {
+        super.onResume()
+        updateRetryButtonVisibility()
+        updateBottomSheetVisibility()
+    }
+
+    private fun updateRetryButtonVisibility() {
+        if (isRetryButtonVisible) {
+            binding.retryButton.visibility = View.VISIBLE
+        } else {
+            binding.retryButton.visibility = View.GONE
+        }
+    }
+
+    private fun updateBottomSheetVisibility() {
+        if (isLoadingComplete && !isRetryButtonVisible) {
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            val bottomSheetFragment = ResultDetailFragment.newInstance()
+            fragmentTransaction.replace(R.id.bottom_sheet_fragment_container, bottomSheetFragment)
+            fragmentTransaction.commit()
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        } else {
+            supportFragmentManager.beginTransaction().remove(ResultDetailFragment()).commit()
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        }
+    }
+
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        finish()
+        if (isRetryButtonVisible) {
+            finish()
+        } else {
+            super.onBackPressed()
+        }
     }
 }

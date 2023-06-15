@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "929309151397",
+    "firebase_url": "https://scancare-cde5f-default-rtdb.firebaseio.com",
+    "project_id": "scancare-cde5f",
+    "storage_bucket": "scancare-cde5f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929309151397:android:3f7af1d18ab33f905f7d4c",
+        "android_client_info": {
+          "package_name": "com.maxisud.scancare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "929309151397-vc04tghf3ul0jvoanapp6odge9r63j11.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maxisud.scancare",
+            "certificate_hash": "58cae6595839d584627426ef2b7f3e7cbccf07d5"
+          }
+        },
+        {
+          "client_id": "929309151397-aoc6qc2okfcbidi2p833rat1eeft4au7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoIvnESaC0FtHwEB4pj0vuJkkhMn9S9DQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "929309151397-aoc6qc2okfcbidi2p833rat1eeft4au7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
