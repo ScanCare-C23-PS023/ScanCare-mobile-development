@@ -51,6 +51,46 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/logo_text" />
 
+            <TextView
+                android:id="@+id/logout_text"
+                style="@style/textfont_primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="gone"
+                android:text="@string/logout"
+                app:layout_constraintBottom_toBottomOf="@id/tv_user"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_welcome" />
+
+            <TextView
+                android:id="@+id/tv_welcome"
+                style="@style/textfont_secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="@string/welcome_string"
+                android:textSize="12sp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tv_user"
+                style="@style/textfont_primary"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:text="@string/username_tv"
+                android:textSize="20sp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_welcome"
+                app:layout_constraintTop_toBottomOf="@id/tv_welcome"/>
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_actionbar"
                 android:layout_width="wrap_content"
@@ -88,7 +128,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/banner_1" />
+                        android:src="@drawable/banner_carousel_1" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -105,7 +145,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/banner_1" />
+                        android:src="@drawable/banner_carousel_2" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -122,7 +162,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/banner_1" />
+                        android:src="@drawable/banner_carousel_3" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.constraintlayout.utils.widget.ImageFilterView
@@ -216,17 +256,17 @@
                 app:layout_constraintGuide_begin="507dp" />
 
 
-            <pl.droidsonroids.gif.GifImageView
-                android:id="@+id/loading_gif"
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:srcCompat="@drawable/scancare_loading"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                />
+                tools:visibility="visible" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

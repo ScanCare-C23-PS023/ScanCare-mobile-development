@@ -15,29 +15,32 @@ data class ProductDetailResponse(
 data class ProductDetailResponseItem(
 
 	@field:SerializedName("bgColor")
-	val bgColor: String,
+	val bgColor: String = "",
 
 	@field:SerializedName("kind")
-	val kind: String,
+	val kind: String = "",
 
 	@field:SerializedName("imageURL")
-	val imageURL: String,
+	val imageURL: String = "",
 
 	@field:SerializedName("rating")
-	val rating: String,
+	val rating: String = "",
 
 	@field:SerializedName("ingredients")
-	val ingredients: String,
+	val ingredients: String = "",
 
 	@field:SerializedName("id")
-	val id: String,
+	val id: String = "",
 
 	@field:SerializedName("time")
-	val time: String,
+	val time: String = "",
 
 	@field:SerializedName("brand")
-	val brand: String,
+	val brand: String = "",
 
 	@field:SerializedName("desc")
-	val desc: String
+	val desc: String = "",
+
+	@SerializedName("isFavorite")
+	var isFavorite: Boolean? = null
 ) : Parcelable

@@ -34,14 +34,19 @@ class ScanningViewModel : ViewModel() {
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> = _toastMessage
 
+    private val _isRetryButtonVisible = MutableLiveData<Boolean>()
+    val isRetryButtonVisible: LiveData<Boolean> = _isRetryButtonVisible
+
     val timeoutHandler = Handler(Looper.getMainLooper())
     val timeoutRunnable = Runnable {
         if (SharedRepository.prediction.value == null) {
             SharedRepository.setTimeout(true)
         }
     }
+    var lastUploadData: MultipartBody.Part? = null
 
     fun uploadImage(imageMultiPart: MultipartBody.Part){
+        lastUploadData = imageMultiPart
         SharedRepository.setLoading(true)
         timeoutHandler.postDelayed(timeoutRunnable, 5000)
         val apiService = ApiConfig.getFlaskApiService()
@@ -85,6 +90,13 @@ class ScanningViewModel : ViewModel() {
     fun setCroppedImageUri(uri: Uri) {
         _croppedImageUri.value = uri
     }
+    fun retryUploadImage() {
+        lastUploadData?.let {
+            uploadImage(it)
+        }
+        _isRetryButtonVisible.value = false
+    }
+
     companion object {
         private const val TAG = "ScanningViewModel"
     }

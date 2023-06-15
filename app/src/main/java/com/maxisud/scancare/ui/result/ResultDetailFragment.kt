@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.maxisud.scancare.MainActivity
 import com.maxisud.scancare.data.response.DiseaseDetailResponse
 import com.maxisud.scancare.data.response.PredictionResponseItem
 import com.maxisud.scancare.data.response.ProductResponseItem
@@ -40,6 +42,19 @@ class ResultDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentResultDetailBinding.inflate(layoutInflater)
+
+        val tvDetailDisease = binding.tvDetailDisease
+
+        tvDetailDisease.viewTreeObserver.addOnGlobalLayoutListener {
+            val lineCount = tvDetailDisease.layout.lineCount
+            val maxLines = tvDetailDisease.maxLines
+            val textSize = tvDetailDisease.textSize
+
+            if (lineCount > maxLines) {
+                val scaledTextSize = textSize * maxLines.toFloat() / lineCount.toFloat()
+                tvDetailDisease.setTextSize(TypedValue.COMPLEX_UNIT_PX, scaledTextSize)
+            }
+        }
         SharedRepository.prediction.observe(viewLifecycleOwner, Observer { predictions ->
             val prediction1 = predictions?.get(0)
             val prediction2 = predictions?.get(1)
@@ -70,6 +85,13 @@ class ResultDetailFragment : Fragment() {
             binding.rvRecommended.layoutManager = layoutManager
         })
 
+        binding.buttonHome.setOnClickListener {
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            requireActivity().finish()
+        }
+
         resultDetailViewModel.detailDisease.observe(viewLifecycleOwner, Observer { detailDisease ->
             setDetailData(detailDisease)
         })
@@ -83,11 +105,7 @@ class ResultDetailFragment : Fragment() {
         return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-        SharedRepository.clear()
-    }
+
 
     private fun setDetailData(disease: DiseaseDetailResponse){
         binding.tvDetailDisease.text = disease.characteristics

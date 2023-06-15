@@ -78,10 +78,11 @@
             app:layout_constraintGuide_begin="255dp" />
 
         <ImageView
+            android:id="@+id/icon_favorite"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="32dp"
-            android:src="@drawable/ic_favorite_red_24dp"
+            android:src="@drawable/ic_favorite_red_border_24dp"
             app:layout_constraintBottom_toBottomOf="@id/product_kind"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -102,6 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@string/times_string"
+            android:maxLines="2"
             app:layout_constraintBottom_toBottomOf="@id/imageview_timer"
             app:layout_constraintEnd_toStartOf="@id/imageview_leaf"
             app:layout_constraintStart_toEndOf="@id/imageview_timer"
@@ -126,6 +128,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:text="@string/times_string"
+            android:maxLines="2"
             app:layout_constraintBottom_toBottomOf="@id/imageview_timer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/imageview_timer" />
@@ -138,6 +141,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="292dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

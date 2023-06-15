@@ -9,8 +9,10 @@ import com.google.gson.Gson
 import com.maxisud.scancare.data.response.DiseaseDetailResponse
 import com.maxisud.scancare.data.response.ProductResponseItem
 import com.maxisud.scancare.data.retrofit.ApiConfig
+import com.maxisud.scancare.ui.SharedRepository
 import com.maxisud.scancare.ui.home.HomeViewModel
 import com.maxisud.scancare.ui.product_detail.ProductDetailViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,6 +31,7 @@ class ResultDetailViewModel : ViewModel() {
     val fragmentState = MutableLiveData<Int>()
 
     fun getDetailDisease(nameDisease: String){
+        checkForTimeout(5000)
         viewModelScope.launch {
             _isLoading.value = true
             val client = ApiConfig.getApiService().getDetailDisease(nameDisease)
@@ -61,6 +64,7 @@ class ResultDetailViewModel : ViewModel() {
     }
 
     fun findProductsDisease(name: String) {
+        checkForTimeout(5000)
         viewModelScope.launch {
             val client = ApiConfig.getApiService().getRecProductDisease(name)
             Log.d(TAG, "API request URL: ${client.request().url}")
@@ -86,6 +90,15 @@ class ResultDetailViewModel : ViewModel() {
                     Log.e(TAG, "onFailure: ${t.message}")
                 }
             })
+        }
+    }
+
+    fun checkForTimeout(time: Long) {
+        viewModelScope.launch {
+            delay(time)
+            if (_products.value == null || _detailDisease.value == null) {
+                SharedRepository._isTimeout.value = true
+            }
         }
     }
 

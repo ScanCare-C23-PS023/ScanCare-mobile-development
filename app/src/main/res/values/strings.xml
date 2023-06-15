@@ -14,7 +14,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="bottom_sheet_behavior">com.google.android.material.bottomsheet.BottomSheetBehavior</string>
-    <string name="signin">SignIn</string>
+    <string name="signin">Sign In</string>
     <string name="recommended_title">Top 10 Recommended Skincare</string>
     <string name="see_all">See all</string>
     <string name="percent">69%</string>
@@ -25,4 +25,18 @@
     <string name="times_string">Once in A day</string>
     <string name="skincare_recomendation">Skincare Recomendation</string>
     <string name="title_articles_temp">This is the example of a very long article title that needs to wrap onto two lines</string>
+    <string name="welcome_string">Welcome Back,</string>
+    <string name="username_tv">Username!</string>
+    <string name="logout">Logout</string>
+    <string name="login_message">You are not logged in, you need to log in to see your favorites product</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="full_name">Full Name</string>
+    <string name="email">Email</string>
+    <string name="login_now">Login Now</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="don_t_have_an_account">Don\'t Have An Account? </string>
+    <string name="sign_up">Sign Up</string>
+    <string name="your_favorites">Your Favorites</string>
+    <string name="home">Home</string>
 </resources>
